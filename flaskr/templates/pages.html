@@ -5,12 +5,19 @@ Wiki Pages
 {% endblock %}
 
 {% block content %}
-<h3>Pages contained in this Wiki</h3>
-<ul>
-    {% for page in all_pages %}
-    <li><a href="{{ url_for('pages', name=page) }}">{{page}}</a></li>
-    {% endfor %}
-</ul>
-
+  <section>
+    <h3 class="title is-4">Pages contained in this Wiki</h3>
+    <p class="is-italic">Select a page below to read or edit its content.</p>
+    <ul>
+      {% for page in all_pages %}
+        <li class="mb-2">
+          <a class="has-text-link is-size-5" 
+             href="{{ url_for('pages', name=page) }}"
+             title="Open the ‘{{ page }}’ page">
+            {{ page }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
 {% endblock %}
-

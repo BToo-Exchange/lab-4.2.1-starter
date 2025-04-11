@@ -2,35 +2,39 @@
 <html>
 
 <head>
-    <head>
-        <title>{% block page_name %}{{ page_name }}{% endblock %}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    </head>
+  <title>{% block page_name %}{{ page_name }}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <!-- The below tag is using Bulma CSS. Try replacing line 14 with line 13. -->
-    <!-- <div class="has-text-success-dark is-size-4  has-text-weight-medium"> -->
-    <div>
-        <a href="{{ url_for('home') }}">
-            Home
-        </a>
-        &nbsp;&nbsp;
-        <a href="{{ url_for('all_pages') }}">
-            Pages
-        </a>
-        &nbsp;&nbsp;
-        <a href="{{ url_for('about') }}">
-            About
-        </a>
-    </div>
+  <section class="section">
+    <div class="container">
 
-    <!-- The below tag is using Bulma CSS. Try replacing line 30 with line 29. -->
-    <!-- <div class="content"> -->
-    <div>
-        {% block content %}{{ page_content }}{% endblock %}
-    </div>
+      <nav class="navbar is-light mb-5" role="navigation" aria-label="main navigation">
+        <div class="navbar-menu">
+          <a class="navbar-item has-text-link" href="{{ url_for('home') }}" title="Return to the homepage">Home</a>
+          <a class="navbar-item has-text-link" href="{{ url_for('all_pages') }}" title="See all wiki pages">Pages</a>
+          <a class="navbar-item has-text-link" href="{{ url_for('about') }}" title="Learn about Cats on Skis">About</a>
+        </div>
+      </nav>
 
+      <!-- Page title -->
+      <h1 class="title is-3 has-text-centered mb-5">{{ page_name }}</h1>
+
+      <div class="content">
+        {% if page_name == 'Home' %}
+          <!-- Only the intro on Home -->
+          <p class="subtitle is-6 mb-5">
+            Welcome to the Cats on Skis Wiki Index! Browse existing pages via the “Pages” link above.
+          </p>
+        {% else %}
+          <!-- All other pages render their content block -->
+          {% block content %}{{ page_content }}{% endblock %}
+        {% endif %}
+      </div>
+
+    </div>
+  </section>
 </body>
 
 </html>

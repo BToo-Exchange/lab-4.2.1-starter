@@ -22,31 +22,46 @@ def make_endpoints(app, backend):
 
     @app.route("/")
     def home():
-        """Returns the home page."""
-        return render_template("main.html",
-                               page_name="Wiki Index",
-                               page_content="Welcome to the Wiki!")
+        """Returns the home page (wiki index)."""
+        all_pages = backend.get_all_page_names()
+        return render_template(
+            "main.html",
+            page_name="Home",
+            all_pages=all_pages
+        )
 
     @app.route("/about")
     def about():
         """Returns an about page."""
-        return render_template("about.html")
+        return render_template(
+            "about.html",
+            page_name="About Cats on Skis"
+        )
 
     @app.route("/images/<image>")
     def images(image):
         """Returns the image from backend.get_image."""
-        return send_file(backend.get_image(image), mimetype='image/jpeg')
+        return send_file(
+            backend.get_image(image),
+            mimetype='image/jpeg'
+        )
 
     @app.route("/pages")
     def all_pages():
         """Returns all of the pages in a list via backend.get_all_page_names."""
-        return render_template("pages.html",
-                               page_name="Wiki Index",
-                               all_pages=backend.get_all_page_names())
+        pages = backend.get_all_page_names()
+        return render_template(
+            "pages.html",
+            page_name="Wiki Pages",
+            all_pages=pages
+        )
 
     @app.route("/pages/<name>")
     def pages(name):
-        """Returns the page from backend.get_wiki_page"""
-        return render_template("main.html",
-                               page_name=name,
-                               page_content=backend.get_wiki_page(name))
+        """Returns the page from backend.get_wiki_page."""
+        content = backend.get_wiki_page(name)
+        return render_template(
+            "main.html",
+            page_name=name,
+            page_content=content
+        )

@@ -5,18 +5,25 @@ About Cats on Skis
 {% endblock %}
 
 {% block content %}
-<h3>About Cats on Skis</h3>
+  <section>
+    <h3 class="title is-4">About Cats on Skis</h3>
+    <p class="subtitle is-6">We love Cats on Skis! This is the absolute best place to find information about cats on skis.</p>
+  </section>
 
-<p>
-We love Cats on Skis! This is the absolute best place to find information about cats on skis.
-</p>
+  <section class="mt-5">
+    <h3 class="title is-4">Your Authors</h3>
+    <div class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <img src="{{ url_for('images', image='slalom-sammy') }}" alt="Slalom Sammy">
+        </p>
+      </figure>
+      <div class="media-content">
+        <p class="title is-5">Slalom Sammy</p>
+      </div>
+    </div>
 
-<h3>Your Authors</h3>
-
-<p>
-Slalom Sammy 
-<img src="{{ url_for('images', image='slalom-sammy') }}">
-</p>
-
+   
+  </section>
 {% endblock %}
 
